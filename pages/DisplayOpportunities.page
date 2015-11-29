@@ -1,0 +1,29 @@
+<apex:page standardController="Opportunity" recordSetVar="Opportunities" extensions="ExtOpportunityCtrlr">
+    <apex:sectionHeader id="sectionHead1" title="Custom Opportunity List Page" subtitle="developed by Upendra" description="This page will always show recent chnages at the top"/>
+    <c:AjaxLoader />
+    <apex:form >
+        <apex:pageBlock id="display-opportunity" title="Opportunity Details" rendered="{!$ObjectType.Opportunity.accessible}">
+            <apex:pageBlockTable value="{!opportunityList}" var="o">
+                <apex:column value="{!o.name}"/>
+                <apex:column value="{!o.LeadSource}"  />
+                <apex:column value="{!o.Type}"/>
+                <apex:column value="{!o.ExpectedRevenue}"/>
+                <apex:column value="{!o.closedate}"/>
+            </apex:pageBlockTable>
+            
+            <apex:commandButton value="First" action="{!first}" disabled="{!( !hasPrevious)}" reRender="display-opportunity" status="loadStatus" />
+            <apex:commandButton value="Previous" action="{!previous}" disabled="{!( !hasPrevious)}" reRender="display-opportunity" status="loadStatus" />
+
+            <apex:outputText value="{!pageNumber} / {!totalPages}"></apex:outputText>
+            
+            <apex:commandButton disabled="{!(! hasNext)}" value="Next" action="{!next}" reRender="display-opportunity" status="loadStatus" />
+            <apex:commandButton disabled="{!(! hasNext)}" value="Last" action="{!last}" reRender="display-opportunity" status="loadStatus" />
+            <apex:commandButton disabled="{!(! hasNext)}" value="Refresh" action="{!refresh}" reRender="display-opportunity" status="loadStatus" />
+        </apex:pageBlock>
+
+        <!-- Display the block if user doesn't have access to the object. -->
+        <apex:pageBlock rendered="NOT({!$ObjectType.Opportunity.accessible})">
+            <p>Sorry, but you cannot see the data because you do not have access to the Lead object.</p>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

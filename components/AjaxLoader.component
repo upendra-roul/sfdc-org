@@ -1,0 +1,8 @@
+<apex:component >
+    <apex:actionStatus onstart="startLoading();" onstop="endLoading();" id="loadStatus"/>
+    <apex:stylesheet value="{!URLFOR($Resource.ajaxloader, '/ajaxloader/ajax-loader.css')}"/>
+    <div id="load_scrl" class="loadingBox loader" style="display:none"> </div>
+    <div class="loadingBox overlay"> </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <apex:includeScript value="{!URLFOR($Resource.ajaxloader, '/ajaxloader/ajax-loader.js')}"/>
+</apex:component>

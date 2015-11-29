@@ -1,0 +1,32 @@
+<apex:page controller="CustomOpportunityController">
+    <apex:form >
+        <apex:pageBlock title="Opportunity Details" id="details" rendered="{! IF( opportunities != null && opportunities.size > 0, true, false)}">
+            <apex:pageblockSection >
+                <apex:selectList value="{!opportunityType}" multiselect="false" size="1">
+                    <apex:actionSupport event="onchange" action="{!searchFilter}" reRender="details"></apex:actionSupport>
+                    <apex:selectOptions value="{!types}"/>
+                </apex:selectList>
+            </apex:pageblockSection>
+
+            <apex:pageBlockTable value="{!opportunities}" var="o">
+                <apex:column value="{!o.name}"/>
+                <apex:column value="{!o.LeadSource}"  />
+                <apex:column value="{!o.Type}"/>
+                <apex:column value="{!o.ExpectedRevenue}"/>
+                <apex:column value="{!o.closedate}"/>
+            </apex:pageBlockTable>
+            
+            <apex:pageblockButtons >
+                <apex:commandButton value="First Page" rerender="details" action="{!FirstPage}" disabled="{!prv}"/>
+                <apex:commandButton value="Previous" rerender="details" action="{!previous}" disabled="{!prv}"/>
+                <apex:outputText value="{!currentPageNum} Of {!totalPages}"></apex:outputText>
+                <apex:commandButton value="Next" rerender="details" action="{!next}" disabled="{!nxt}"/>
+                <apex:commandButton value="Last Page" rerender="details" action="{!LastPage}" disabled="{!nxt}"/>
+                <apex:selectList value="{!currentPageNum}" multiselect="false" size="1">
+                    <apex:actionSupport event="onchange" action="{!goToPage}" reRender="details"></apex:actionSupport>
+                    <apex:selectOptions value="{!pages}"/>
+                </apex:selectList>
+            </apex:pageblockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

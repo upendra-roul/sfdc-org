@@ -1,0 +1,10 @@
+<apex:page standardController="Account" sidebar="false" showHeader="false" extensions="Page1ControllerExtenstions" >
+  <!-- Begin Default Content REMOVE THIS -->
+  <apex:detail subject="{!$CurrentPage.parameters.id}" relatedList="false" title="true"/> 
+  <!-- End Default Content REMOVE THIS -->
+  <apex:form >
+  <apex:outputLabel value="{!counter}"  id="label1"/>
+  <apex:commandButton value="Custom Button" action="{!customButtonAction}" rerender="label1"/>
+  <apex:outputLabel value="{!counter}"  id="label2"/>
+  </apex:form>
+</apex:page>

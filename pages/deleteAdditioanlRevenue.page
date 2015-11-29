@@ -1,0 +1,26 @@
+<apex:page standardController="AdditonalRevenue__c" sidebar="false" extensions="AdditonalRevenueControllerExtn">
+    <style type="text/css">
+        .textarea {margin: 0px; width: 506px; height: 111px;}
+    </style>
+    <apex:form id="captureDeleteReason">
+        <apex:pageBlock >
+            <apex:outputPanel id="jspanel">
+                <apex:pageMessages id="showmsg" escape="false"></apex:pageMessages>
+                <apex:outputPanel id="redirectToList" rendered="{!isSuccess}">
+                    <script type="text/javascript">
+                        setTimeout(function(){
+                        	window.top.location.href = '/a01?fcf=00B28000002rvxm';
+                        },5000);
+                    </script>
+                </apex:outputPanel>
+            </apex:outputPanel>
+
+            <apex:pageblocksection title="{!$Label.Reason_For_Delete}" rendered="{! (!isSuccess) }">
+                <apex:inputTextarea id="reasonForDelete" value="{!reasonForDelete}" styleClass="textarea" required="true" />
+            </apex:pageblocksection>
+            <apex:pageBlockButtons rendered="{! (!isSuccess) }" location="bottom">
+                <apex:commandButton value="{!$Label.Confirm_Delete}" action="{!doDelete}" reRender="captureDeleteReason" />
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
